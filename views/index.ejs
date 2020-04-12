@@ -2,10 +2,44 @@
 <html lang="en">
     <head>
         <title>Sup bros</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         <h2>
             YOOOOOO
         </h2>
+
+        <video autoplay></video>
+        <script>
+            function startstream() {
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+            const constrains = {audio: false,
+                 video: {
+                     mandatory: {
+                         minHeight: 360,
+                         maxHeight: 720,
+                         minWidth: 640,
+                         maxWidth: 1280
+                     }
+                 }
+            };
+
+            navigator.getUserMedia(constrains, onSuccess, onError);
+        }
+            const videoTag = document.querySelector('video');
+
+            startstream();
+
+            function onSuccess(stream){
+                console.log("We have a stream boys and girls");
+                videoTag.srcObject = stream;
+                videoTag.className = "blackAndWhite";
+            }
+
+            function onError(error) {
+                console.log("There is an error: ", error)
+            }   
+        </script>
     </body>
 </html>
